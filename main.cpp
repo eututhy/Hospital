@@ -110,7 +110,7 @@ void menuPacientes(vector<Paciente> &pacientes) {
               cin >> cpf;
 
               bool pacienteEncontrado = false;
-              for (const auto &paciente : pacientes) {
+              for (auto &paciente : pacientes) {
                   if (paciente.getCPF() == cpf) {
                       cout << "Paciente encontrado:" << endl;
                       paciente.exibirDados();
@@ -147,7 +147,7 @@ void menuPacientes(vector<Paciente> &pacientes) {
 }
 
 // Função para o submenu de gerenciamento de setores
-void menuSetores(vector<Setor> &setores) {
+void menuSetores(vector<setoresDeInternacao> &setores) {
     int opcao;
     do {
         system("cls");
@@ -163,20 +163,90 @@ void menuSetores(vector<Setor> &setores) {
 
         switch (opcao) {
             case 1:
-                // Implementar função para adicionar setor
+            {
+                string nomeSetor;
+                int capacidade;
+
+                cout << "Digite o nome do setor: ";
+                cin >> nomeSetor;
+                cout << "Digite a capacidade do setor: ";
+                cin >> capacidade;
+
+                setoresDeInternacao novoSetor(nomeSetor, capacidade);
+                setores.push_back(novoSetor);
+
+                cout << "Setor adicionado com sucesso!" << endl;
                 break;
+            }
             case 2:
-                // Implementar função para remover setor
+            {
+                string nomeSetor;
+                cout << "Digite o nome do setor que deseja remover: ";
+                cin >> nomeSetor;
+
+                // Procurar o setor na lista
+                for (auto it = setores.begin(); it != setores.end(); ++it) {
+                    if (it->getNomeSetor() == nomeSetor) {
+                        setores.erase(it);
+                        cout << "Setor removido com sucesso!" << endl;
+                        return;
+                    }
+                }
+
+                cout << "Setor não encontrado." << endl;
                 break;
+            }
             case 3:
-                // Implementar função para alterar dados do setor
+            {
+                string nomeSetor;
+                cout << "Digite o nome do setor que deseja alterar: ";
+                cin >> nomeSetor;
+
+                // Procurar o setor na lista
+                for (auto& setor : setores) {
+                    if (setor.getNomeSetor() == nomeSetor) {
+                        int novaCapacidade;
+                        cout << "Digite a nova capacidade do setor: ";
+                        cin >> novaCapacidade;
+
+                        setor.setCapacidade(novaCapacidade);
+                        cout << "Dados do setor alterados com sucesso!" << endl;
+                        return;
+                    }
+                }
+
+                cout << "Setor não encontrado." << endl;
                 break;
+            }
             case 4:
-                // Implementar função para pesquisar setor
+            {
+                string nomeSetor;
+                cout << "Digite o nome do setor que deseja pesquisar: ";
+                cin >> nomeSetor;
+
+                // Procurar o setor na lista
+                for (const auto& setor : setores) {
+                    if (setor.getNomeSetor() == nomeSetor) {
+                        cout << "Setor encontrado!" << endl;
+                        cout << "Nome do setor: " << setor.getNomeSetor() << endl;
+                        cout << "Capacidade do setor: " << setor.getCapacidade() << endl;
+                        return;
+                    }
+                }
+
+                cout << "Setor não encontrado." << endl;
                 break;
+            }
             case 5:
-                // Implementar função para listar todos os setores
+            {
+                cout << "=== Lista de Setores ===" << endl;
+                for (const auto& setor : setores) {
+                    cout << "Nome do setor: " << setor.getNomeSetor() << endl;
+                    cout << "Capacidade do setor: " << setor.getCapacidade() << endl;
+                    cout << "------------------------" << endl;
+                }
                 break;
+            }
             case 6:
                 cout << "Voltando ao menu principal..." << endl;
                 break;
