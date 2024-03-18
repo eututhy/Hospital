@@ -6,6 +6,8 @@
 
 class UTI : public setoresDeInternacao {
 public:
+    std::string NomeSetor = "UTI"; 
+
     Leito leitosUTI[20];
 
     void alocaPaciente(Paciente p, int l);

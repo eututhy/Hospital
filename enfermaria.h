@@ -6,6 +6,7 @@
 
 class Enfermaria : public setoresDeInternacao {
 public:
+    std::string NomeSetor = "Enfermaria"; 
     Leito leitosEnfermaria[30];
 
     void alocaPaciente(Paciente p, int l);
